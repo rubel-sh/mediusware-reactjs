@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ModalA from "./ModalA";
@@ -7,7 +8,8 @@ const Problem2 = () => {
   const [modalShow, setModalShow] = useState(false);
   const [modalInfo, setModalInfo] = useState([]);
   const [modalType, setModalType] = useState("");
-  // const [modalBInfo, setModalBInfo] = useState([]);
+  const [isEven, setIsEven] = useState(false);
+  console.log(isEven);
 
   const handleModalA = () => {
     setModalShow(true);
@@ -18,7 +20,7 @@ const Problem2 = () => {
         "https://contact.mediusware.com/api/contacts/?format=json"
       );
       const data = await res.json();
-      setModalInfo(data);
+      setModalInfo(data.results);
     };
     getData();
     // Set data to setModalInfo state
@@ -34,12 +36,20 @@ const Problem2 = () => {
         "https://contact.mediusware.com/api/country-contacts/United%20States/"
       );
       const data = await res.json();
-      setModalInfo(data);
+      setModalInfo(data.results);
     };
     getData();
     // Set data to setModalInfo state
     // send the state to modal A
   };
+
+  // Filter only even contacts
+  useEffect(() => {
+    if (isEven) {
+      const filterEvenContactId = modalInfo?.filter((c) => c.id % 2 === 0);
+      setModalInfo(filterEvenContactId);
+    }
+  }, [isEven]);
 
   return (
     <div className="container">
@@ -56,13 +66,15 @@ const Problem2 = () => {
               All Contacts
             </Button>
           </Link>
-          <Button
-            type="button"
-            variant="outline-warning"
-            onClick={handleModalB}
-          >
-            US Contacts
-          </Button>
+          <Link to="/problem-2/uscontacts">
+            <Button
+              type="button"
+              variant="outline-warning"
+              onClick={handleModalB}
+            >
+              US Contacts
+            </Button>
+          </Link>
         </div>
       </div>
 
@@ -70,6 +82,8 @@ const Problem2 = () => {
         info={modalInfo}
         type={modalType}
         show={modalShow}
+        seteven={setIsEven}
+        even={isEven}
         onHide={() => setModalShow(false)}
       />
     </div>

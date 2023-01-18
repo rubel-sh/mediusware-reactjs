@@ -1,10 +1,13 @@
 import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const ModalA = (props) => {
-  const { info, type } = props;
+  const { info, type, even, seteven } = props;
 
-  // contacts
+  const handleCheck = (e) => {
+    seteven(!even);
+  };
 
   console.log(info);
   return (
@@ -50,10 +53,14 @@ const ModalA = (props) => {
 
         {/* Display Contacts */}
         <div className="row row-cols-1">
-          {info?.results?.map((inf) => {
+          {info?.map((inf) => {
             const { country, phone, id } = inf;
             return (
-              <div class="btn btn-outline-primary d-flex justify-content-between align-items-center mb-1">
+              <div
+                key={id}
+                className="btn btn-outline-primary d-flex justify-content-between align-items-center mb-1"
+              >
+                <span>{id}</span>
                 <p>{country.name}</p>
                 <p>{phone}</p>
               </div>
@@ -62,24 +69,28 @@ const ModalA = (props) => {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Form.Check
-          label="Show Contacts with even ID only"
-          name="group1"
-          type="checkbox"
-          className="float-left me-5"
-          id="inline-checkbox-1"
-        />
-
-        <Button
-          onClick={props.onHide}
-          style={{
-            border: "1px solid #46139f",
-            backgroundColor: "white",
-            color: "#46139f",
-          }}
-        >
-          Close
-        </Button>
+        <Form>
+          <Form.Check
+            label="Show Contacts with even ID only"
+            name="group1"
+            type="checkbox"
+            onChange={handleCheck}
+            className="float-left me-5"
+            id="inline-checkbox-1"
+          />
+        </Form>
+        <Link to="/problem-2">
+          <Button
+            onClick={props.onHide}
+            style={{
+              border: "1px solid #46139f",
+              backgroundColor: "white",
+              color: "#46139f",
+            }}
+          >
+            Close
+          </Button>
+        </Link>
       </Modal.Footer>
     </Modal>
   );
