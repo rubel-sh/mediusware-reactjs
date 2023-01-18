@@ -37,27 +37,31 @@ const ModalA = (props) => {
         {/* Disaply Modal Buttons */}
 
         <div className="py-3">
-          <Button
-            style={{
-              border: "2px solid #46139f",
-              backgroundColor: "white",
-              color: "#46139f",
-              marginRight: "15px",
-            }}
-            onClick={handleModalA}
-          >
-            All Contacts
-          </Button>
-          <Button
-            style={{
-              border: "2px solid #ff7f50",
-              backgroundColor: "white",
-              color: "#ff7f50",
-            }}
-            onClick={handleModalB}
-          >
-            US Contacts
-          </Button>
+          <Link to="/problem-2/allContacts">
+            <Button
+              style={{
+                border: "2px solid #46139f",
+                backgroundColor: "white",
+                color: "#46139f",
+                marginRight: "15px",
+              }}
+              onClick={handleModalA}
+            >
+              All Contacts
+            </Button>
+          </Link>
+          <Link to="/problem-2/uscontacts">
+            <Button
+              style={{
+                border: "2px solid #ff7f50",
+                backgroundColor: "white",
+                color: "#ff7f50",
+              }}
+              onClick={handleModalB}
+            >
+              US Contacts
+            </Button>
+          </Link>
         </div>
 
         {/* Search Input */}
