@@ -1,15 +1,22 @@
 import React from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, InputGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const ModalA = (props) => {
-  const { info, type, even, seteven, handleModalA, handleModalB } = props;
+  const {
+    info,
+    type,
+    even,
+    seteven,
+    handleModalA,
+    handleModalB,
+    handleNumberSearch,
+  } = props;
 
   const handleCheck = (e) => {
     seteven(!even);
   };
 
-  console.log(info);
   return (
     <Modal
       {...props}
@@ -53,21 +60,36 @@ const ModalA = (props) => {
           </Button>
         </div>
 
+        {/* Search Input */}
+        <Form>
+          <InputGroup className="mb-3 pt-3">
+            <InputGroup.Text id="basic-addon1">Seach</InputGroup.Text>
+            <Form.Control
+              placeholder="Phone Numer"
+              aria-label="phoneNumber"
+              aria-describedby="basic-addon1"
+              onChange={(e) => handleNumberSearch(e)}
+            />
+          </InputGroup>
+        </Form>
+
         {/* Display Contacts */}
-        <div className="row row-cols-1">
-          {info?.map((inf) => {
-            const { country, phone, id } = inf;
-            return (
-              <div
-                key={id}
-                className="btn btn-outline-primary d-flex justify-content-between align-items-center mb-1"
-              >
-                <span>{id}</span>
-                <p>{country.name}</p>
-                <p>{phone}</p>
-              </div>
-            );
-          })}
+        <div className="container">
+          <div className="row row-cols-1">
+            {info?.map((inf) => {
+              const { country, phone, id } = inf;
+              return (
+                <div
+                  key={id}
+                  className="btn btn-outline-primary d-flex justify-content-between align-items-center mb-1"
+                >
+                  <span>{id}</span>
+                  <p>{country.name}</p>
+                  <p>{phone}</p>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </Modal.Body>
       <Modal.Footer>

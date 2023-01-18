@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Form, InputGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ModalA from "./ModalA";
 
@@ -9,7 +9,8 @@ const Problem2 = () => {
   const [modalInfo, setModalInfo] = useState([]);
   const [modalType, setModalType] = useState("");
   const [isEven, setIsEven] = useState(false);
-  console.log(isEven);
+
+  // Event Handlers
 
   const handleModalA = () => {
     setIsEven(false);
@@ -43,6 +44,10 @@ const Problem2 = () => {
     getData();
     // Set data to setModalInfo state
     // send the state to modal A
+  };
+
+  const handleNumberSearch = (e) => {
+    const inputNumber = e.target.value;
   };
 
   // Filter only even contacts
@@ -87,6 +92,7 @@ const Problem2 = () => {
         seteven={setIsEven}
         handleModalA={handleModalA}
         handleModalB={handleModalB}
+        handleNumberSearch={handleNumberSearch}
         even={isEven}
         onHide={() => setModalShow(false)}
       />
