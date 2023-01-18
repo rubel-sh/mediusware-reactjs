@@ -1,10 +1,12 @@
 import React from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
 
 const ModalA = (props) => {
-  const { modalInfo, modalType } = props;
+  const { info, type } = props;
 
-  console.log(modalInfo);
+  // contacts
+
+  console.log(info);
   return (
     <Modal
       {...props}
@@ -13,20 +15,71 @@ const ModalA = (props) => {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          {modalType}
-        </Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">{type}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
+        {type === "Modal A" ? (
+          <h4>Contacts of all countries</h4>
+        ) : (
+          <h4>Contacts of US country</h4>
+        )}
+
+        {/* Disaply Modal Buttons */}
+
+        <div className="py-3">
+          <Button
+            style={{
+              border: "2px solid #46139f",
+              backgroundColor: "white",
+              color: "#46139f",
+              marginRight: "15px",
+            }}
+          >
+            All Contacts
+          </Button>
+          <Button
+            style={{
+              border: "2px solid #ff7f50",
+              backgroundColor: "white",
+              color: "#ff7f50",
+            }}
+          >
+            US Contacts
+          </Button>
+        </div>
+
+        {/* Display Contacts */}
+        <div className="row row-cols-1">
+          {info?.results?.map((inf) => {
+            const { country, phone, id } = inf;
+            return (
+              <div class="btn btn-outline-primary d-flex justify-content-between align-items-center mb-1">
+                <p>{country.name}</p>
+                <p>{phone}</p>
+              </div>
+            );
+          })}
+        </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Form.Check
+          label="Show Contacts with even ID only"
+          name="group1"
+          type="checkbox"
+          className="float-left me-5"
+          id="inline-checkbox-1"
+        />
+
+        <Button
+          onClick={props.onHide}
+          style={{
+            border: "1px solid #46139f",
+            backgroundColor: "white",
+            color: "#46139f",
+          }}
+        >
+          Close
+        </Button>
       </Modal.Footer>
     </Modal>
   );
