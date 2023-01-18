@@ -29,6 +29,14 @@ const Problem2 = () => {
     setModalShow(true);
     setModalType("Modal B");
     // Call the API
+    const getData = async () => {
+      const res = await fetch(
+        "https://contact.mediusware.com/api/country-contacts/United%20States/"
+      );
+      const data = await res.json();
+      setModalInfo(data);
+    };
+    getData();
     // Set data to setModalInfo state
     // send the state to modal A
   };
