@@ -3,7 +3,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const ModalA = (props) => {
-  const { info, type, even, seteven } = props;
+  const { info, type, even, seteven, handleModalA, handleModalB } = props;
 
   const handleCheck = (e) => {
     seteven(!even);
@@ -37,6 +37,7 @@ const ModalA = (props) => {
               color: "#46139f",
               marginRight: "15px",
             }}
+            onClick={handleModalA}
           >
             All Contacts
           </Button>
@@ -46,6 +47,7 @@ const ModalA = (props) => {
               backgroundColor: "white",
               color: "#ff7f50",
             }}
+            onClick={handleModalB}
           >
             US Contacts
           </Button>
@@ -74,6 +76,7 @@ const ModalA = (props) => {
             label="Show Contacts with even ID only"
             name="group1"
             type="checkbox"
+            checked={even}
             onChange={handleCheck}
             className="float-left me-5"
             id="inline-checkbox-1"

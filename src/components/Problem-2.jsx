@@ -12,6 +12,7 @@ const Problem2 = () => {
   console.log(isEven);
 
   const handleModalA = () => {
+    setIsEven(false);
     setModalShow(true);
     setModalType("Modal A");
     // Call the API
@@ -28,6 +29,7 @@ const Problem2 = () => {
   };
 
   const handleModalB = () => {
+    setIsEven(false);
     setModalShow(true);
     setModalType("Modal B");
     // Call the API
@@ -83,6 +85,8 @@ const Problem2 = () => {
         type={modalType}
         show={modalShow}
         seteven={setIsEven}
+        handleModalA={handleModalA}
+        handleModalB={handleModalB}
         even={isEven}
         onHide={() => setModalShow(false)}
       />
